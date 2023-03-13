@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_training_module,access_training_modules,model_training_module,base.group_user,1,1,1,1
+access_tranining_attendees,access_tranining_attendees,model_training_attendees,base.group_user,1,1,1,1
+access_multi_add_attendee_wizard,access_multi_add_attendee_wizard,model_multi_add_attendee_wizard,base.group_user,1,1,1,1

@@ -1,0 +1,26 @@
+<odoo>
+    <record id="wizard_training_view" model="ir.ui.view">
+        <field name="name">Add Attedee</field>
+        <field name="model">multi.add.attendee.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add Attendee">
+                <group>
+                    <field name="attendee_ids"/>
+                </group>
+                <footer>
+                    <button string="add" name="add_attendee" type="object" class="btn-primary"/>
+                    <button string="cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="add_attendee_action" model="ir.actions.act_window">
+        <field name="name">Add Attendee</field>
+        <field name="res_model">multi.add.attendee.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_training_view"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_training_module"/>    
+        <field name="binding_view_types">form,list</field>
+    </record>
+</odoo>

@@ -1,0 +1,10 @@
+<odoo>
+    <data noupdate="1">
+        <record id="sequence_perpustakaan_seq" model="ir.sequence">
+            <field name="name">Perpustakaan Sequence</field>
+            <field name="code">perpustakaan.sequence</field>
+            <field name="prefix">TC</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+</odoo>

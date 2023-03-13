@@ -1,0 +1,138 @@
+<odoo>
+    <!-- make view perpustakaan berdasarkan model -->
+    <record id="view_perpustakaan_form" model="ir.ui.view">
+        <field name="name">perpustakaan.form</field>
+        <field name="model">peminjaman.buku</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                <label for="name"/>
+                <h1>
+                    <field name="name"/>
+                </h1>
+                    <group>
+                        <group>
+                            <field name="peminjam_id"/>
+                            <field name="petugas_id"/>
+                            
+                            <field name="no_telpon"/>
+                        </group>
+                        <group>
+                            <field name="tanggal_pinjam"/>
+                            <field name="tanggal_kembali"/>
+                            <field name="status"/>
+                            <field name="status_pembayaran"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Daftar Buku">
+                            <field name="daftar_buku_ids">
+                                <tree>
+                                    <field name="peminjaman_id"/>
+                                    <field name="buku_id"/>
+                                    <field name="harga_pinjam_buku"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group>
+                        <field name="total_harga_pinjam"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- make tree -->
+    <record id="view_perpustakaan_tree" model="ir.ui.view">
+        <field name="name">perpustakaan.tree</field>
+        <field name="model">peminjaman.buku</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="tanggal_pinjam"/>
+                <field name="tanggal_kembali"/>
+                <field name="no_telpon"/>
+                <field name="petugas_id"/>
+                <field name="daftar_buku_ids"/>
+                <field name="status"/>
+                <field name="total_harga_pinjam"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- make action -->
+    <record id="action_perpustakaan_view" model="ir.actions.act_window">
+        <field name="name">Perpustakaan</field>
+        <field name="res_model">peminjaman.buku</field>
+        <field name="view_mode">tree,form,kanban,calendar</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create your first perpustakaan.
+            </p><p>
+                Perpustakaan is a collection of books.
+            </p>
+        </field>
+    </record>
+
+    <!-- make kanban -->
+    <record id="view_perpustakaan_kanban" model="ir.ui.view">
+        <field name="name">peminjaman.buku.kanban</field>
+        <field name="model">peminjaman.buku</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="row">
+                                 <div t-if="record.name.value" class="col-6 text-center">
+                                    <strong>Name</strong>
+                                </div> 
+                                <div t-if="record.daftar_buku_ids.value" class="col-6 text-center">
+                                    <strong>Daftar Buku</strong>
+                                </div>
+                                <div t-if="record.name.value" class="col-6 text-center">    
+                                    <field name="name"/> 
+                                </div>
+                                <div t-if="record.daftar_buku_ids.value" class="col-6 text-center">
+                                    <field name="daftar_buku_ids"/> 
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- calendar -->
+    <record id="view_perpustakaan_calendar" model="ir.ui.view">
+        <field name="name">peminjaman.buku.calendar</field>
+        <field name="model">peminjaman.buku</field>
+        <field name="arch" type="xml">
+            <calendar string="scheduled" date_start="tanggal_pinjam">
+                <field name="name"/>
+                <field name="tanggal_pinjam"/>
+                <field name="tanggal_kembali"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="training_course_product_inherit" model="ir.ui.view">
+        <field name="name">product.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook" position="inside">
+                <page string="Sinopsis">
+                    <field name="sinopsis"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- menu item -->
+    <menuitem id="menu_perpustakaan" name="Perpustakaan" action="product.product_normal_action_sell"/>
+    <menuitem id="submenu_perpustakaan" name="Perpustakaan" parent="menu_perpustakaan" action="action_perpustakaan_view"/>
+
+</odoo>

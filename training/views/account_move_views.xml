@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_description_training" model="ir.ui.view">
+            <field name="name">view.description.training</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='sale_info_group']" position="inside">
+                    <field name="description" string="Invoice Description"/>
+                </xpath>
+                <label for="partner_id" position="attributes">
+                    <attribute name="string">Pelanggan</attribute>
+                </label>
+                <xpath expr="//field[@name='payment_reference']" position="attributes">
+                    <attribute name="string">Referensi Pembayaran</attribute>
+                </xpath>
+                <xpath expr="//group[@id='other_tab_group']" position="inside">
+                    <group string="Social Media" 
+                    groups="base.group_no_one" 
+                    attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund'))]}">
+                        <field name="instagram"/>
+                        <field name="twitter"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
